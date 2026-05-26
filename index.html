@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi App Dockerizada</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 h-screen flex flex-col items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-md text-center max-w-sm">
+        <h1 class="text-2xl font-bold text-blue-600 mb-4">Frontend Simple</h1>
+        <p class="text-gray-600 mb-6">Esta es una SPA ultra básica corriendo en FastAPI.</p>
+        
+        <button onclick="llamarAPI()" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition">
+            Saludar al Backend
+        </button>
+        
+        <p id="respuesta" class="mt-4 font-medium text-green-600"></p>
+    </div>
+
+    <script>
+        async function llamarAPI() {
+            try {
+                const response = await fetch('/api/saludo');
+                const data = await response.json();
+                document.getElementById('respuesta').innerText = data.mensaje;
+            } catch (error) {
+                document.getElementById('respuesta').innerText = 'Error al conectar con la API';
+            }
+        }
+    </script>
+</body>
+</html>
